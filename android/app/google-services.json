@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "441800769668",
+    "project_id": "praxis-gear-352417",
+    "storage_bucket": "praxis-gear-352417.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441800769668:android:68742e4664253b97ddc2d1",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "441800769668-116hpofqtmg43km95fkh6p768gp0lmph.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAS0POmHQaNx1Fiw255Trvj5agRMq1TcDM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "441800769668-116hpofqtmg43km95fkh6p768gp0lmph.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

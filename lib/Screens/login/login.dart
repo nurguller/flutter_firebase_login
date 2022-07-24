@@ -5,6 +5,8 @@ import 'package:flutter_application_1/components/background.dart';
 import '../../components/background.dart';
 
 class LoginScreen extends StatelessWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -65,9 +67,9 @@ class LoginScreen extends StatelessWidget {
                   alignment: Alignment.center,
                   height: 50.0,
                   width: size.width * 0.5,
-                  decoration: new BoxDecoration(
+                  decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(80.0),
-                      gradient: new LinearGradient(colors: [
+                      gradient: LinearGradient(colors: [
                         Color.fromARGB(255, 255, 136, 34),
                         Color.fromARGB(255, 255, 177, 41)
                       ])),

@@ -5,6 +5,9 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../../components/background.dart';
 
+String email = '';
+String password = '';
+
 class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -40,7 +43,11 @@ class RegisterScreen extends StatelessWidget {
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
-                decoration: InputDecoration(labelText: "Mobile Number"),
+                onChanged: (String text) {
+                  email = text;
+                },
+                decoration: InputDecoration(
+                    hintText: "e-mail", labelText: 'example@gmail.com'),
               ),
             ),
             SizedBox(height: size.height * 0.03),
@@ -61,6 +68,17 @@ class RegisterScreen extends StatelessWidget {
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
+                decoration: InputDecoration(labelText: "Username"),
+              ),
+            ),
+            SizedBox(height: size.height * 0.03),
+            Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.symmetric(horizontal: 40),
+              child: TextField(
+                onChanged: (String text) {
+                  password = text;
+                },
                 decoration: InputDecoration(labelText: "Password"),
                 obscureText: true,
               ),
