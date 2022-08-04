@@ -9,6 +9,8 @@ String email = '';
 String password = '';
 
 class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -20,8 +22,8 @@ class RegisterScreen extends StatelessWidget {
           children: <Widget>[
             Container(
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.symmetric(horizontal: 40),
-              child: Text(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: const Text(
                 "REGISTER",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -33,26 +35,35 @@ class RegisterScreen extends StatelessWidget {
             SizedBox(height: size.height * 0.03),
             Container(
               alignment: Alignment.center,
-              margin: EdgeInsets.symmetric(horizontal: 40),
-              child: TextField(
+              margin: const EdgeInsets.symmetric(horizontal: 40),
+              child: const TextField(
                 decoration: InputDecoration(labelText: "Name"),
               ),
             ),
             SizedBox(height: size.height * 0.03),
             Container(
               alignment: Alignment.center,
-              margin: EdgeInsets.symmetric(horizontal: 40),
+              margin: const EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
                 onChanged: (String text) {
                   email = text;
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     hintText: "e-mail", labelText: 'example@gmail.com'),
               ),
             ),
+            // try {
+//   await FirebaseAuth.instance.signInWithEmailAndPassword(
+//     email: "barry.allen@example.com",
+//     password: "SuperSecretPassword!"
+//   );
+// } on FirebaseAuthException catch  (e) {
+//   print('Failed with error code: ${e.code}');
+//   print(e.message);
+// }
             SizedBox(height: size.height * 0.03),
             IntlPhoneField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Phone Number',
                 border: OutlineInputBorder(
                   borderSide: BorderSide(),
@@ -66,45 +77,47 @@ class RegisterScreen extends StatelessWidget {
             SizedBox(height: size.height * 0.03),
             Container(
               alignment: Alignment.center,
-              margin: EdgeInsets.symmetric(horizontal: 40),
-              child: TextField(
+              margin: const EdgeInsets.symmetric(horizontal: 40),
+              child: const TextField(
                 decoration: InputDecoration(labelText: "Username"),
               ),
             ),
             SizedBox(height: size.height * 0.03),
             Container(
               alignment: Alignment.center,
-              margin: EdgeInsets.symmetric(horizontal: 40),
+              margin: const EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
                 onChanged: (String text) {
                   password = text;
                 },
-                decoration: InputDecoration(labelText: "Password"),
+                decoration: const InputDecoration(labelText: "Password"),
                 obscureText: true,
               ),
             ),
             SizedBox(height: size.height * 0.05),
             Container(
               alignment: Alignment.centerRight,
-              margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-              child: RaisedButton(
+              margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+              child: ElevatedButton(
                 onPressed: () {},
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(80.0)),
-                textColor: Colors.white,
-                padding: const EdgeInsets.all(0),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(80.0)),
+                  primary: Colors.white,
+                  padding: const EdgeInsets.all(0),
+                ),
                 child: Container(
                   alignment: Alignment.center,
                   height: 50.0,
                   width: size.width * 0.5,
-                  decoration: new BoxDecoration(
+                  decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(80.0),
-                      gradient: new LinearGradient(colors: [
-                        Color.fromARGB(255, 255, 136, 34),
-                        Color.fromARGB(255, 255, 177, 41)
+                      gradient: LinearGradient(colors: [
+                        const Color.fromARGB(255, 255, 136, 34),
+                        const Color.fromARGB(255, 255, 177, 41)
                       ])),
                   padding: const EdgeInsets.all(0),
-                  child: Text(
+                  child: const Text(
                     "SIGN UP",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontWeight: FontWeight.bold),
@@ -114,13 +127,15 @@ class RegisterScreen extends StatelessWidget {
             ),
             Container(
               alignment: Alignment.centerRight,
-              margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+              margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               child: GestureDetector(
                 onTap: () => {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()))
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()))
                 },
-                child: Text(
+                child: const Text(
                   "Already Have an Account? Sign in",
                   style: TextStyle(
                       fontSize: 12,
