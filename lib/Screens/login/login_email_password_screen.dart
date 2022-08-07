@@ -1,12 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Screens/register/register.dart';
+import 'package:flutter_application_1/Screens/register/signup_email_password_screen.dart';
 import 'package:flutter_application_1/components/background.dart';
+import 'package:provider/provider.dart';
 
 import '../../components/background.dart';
+import '../../services/firebase_auth_methods.dart';
+import '../../widgets/custom_textfield.dart';
 import '../home.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class EmailPasswordLogin extends StatefulWidget {
+  static String routeName = '/login-email-password';
+  const EmailPasswordLogin({Key? key}) : super(key: key);
+
+  @override
+  _EmailPasswordLoginState createState() => _EmailPasswordLoginState();
+}
+
+class _EmailPasswordLoginState extends State<EmailPasswordLogin> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  void loginUser() {
+    context.read<FirebaseAuthMethods>().loginWithEmail(
+          email: emailController.text,
+          password: passwordController.text,
+          context: context,
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,17 +53,18 @@ class LoginScreen extends StatelessWidget {
             Container(
               alignment: Alignment.center,
               margin: const EdgeInsets.symmetric(horizontal: 40),
-              child: const TextField(
-                decoration: InputDecoration(labelText: "Username"),
+              child: CustomTextField(
+                controller: emailController,
+                hintText: 'Enter your email',
               ),
             ),
             SizedBox(height: size.height * 0.03),
             Container(
               alignment: Alignment.center,
               margin: const EdgeInsets.symmetric(horizontal: 40),
-              child: const TextField(
-                decoration: InputDecoration(labelText: "Password"),
-                obscureText: true,
+              child: CustomTextField(
+                controller: passwordController,
+                hintText: 'Enter your password',
               ),
             ),
             Container(
@@ -67,7 +88,7 @@ class LoginScreen extends StatelessWidget {
               alignment: Alignment.centerRight,
               margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: loginUser,
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(80.0)),
@@ -107,8 +128,10 @@ class LoginScreen extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               child: GestureDetector(
                 onTap: () => {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => RegisterScreen()))
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EmailPasswordSignup()))
                 },
                 child: const Text(
                   "Don't Have an Account? Sign up",

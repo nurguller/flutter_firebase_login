@@ -1,15 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Screens/login/login.dart';
+import 'package:flutter_application_1/Screens/login/login_email_password_screen.dart';
 import 'package:flutter_application_1/components/background.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-
+import 'package:provider/provider.dart';
 import '../../components/background.dart';
+import 'package:flutter_application_1/services/firebase_auth_methods.dart';
+import 'package:flutter_application_1/widgets/custom_textfield.dart';
 
-String email = '';
-String password = '';
+import '../../widgets/custom_button.dart';
 
-class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+class EmailPasswordSignup extends StatefulWidget {
+  static String routeName = '/signup-email-password';
+  const EmailPasswordSignup({Key? key}) : super(key: key);
+
+  @override
+  _EmailPasswordSignupState createState() => _EmailPasswordSignupState();
+}
+
+class _EmailPasswordSignupState extends State<EmailPasswordSignup> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+
+  void signUpUser() async {
+    context.read<FirebaseAuthMethods>().signUpWithEmail(
+          email: emailController.text,
+          password: passwordController.text,
+          phone: phoneController.text,
+          context: context,
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +44,7 @@ class RegisterScreen extends StatelessWidget {
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: const Text(
-                "REGISTER",
+                "Sign Up",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF2661FA),
@@ -44,12 +64,9 @@ class RegisterScreen extends StatelessWidget {
             Container(
               alignment: Alignment.center,
               margin: const EdgeInsets.symmetric(horizontal: 40),
-              child: TextField(
-                onChanged: (String text) {
-                  email = text;
-                },
-                decoration: const InputDecoration(
-                    hintText: "e-mail", labelText: 'example@gmail.com'),
+              child: CustomTextField(
+                controller: emailController,
+                hintText: 'Enter your email',
               ),
             ),
             // try {
@@ -73,6 +90,19 @@ class RegisterScreen extends StatelessWidget {
               onChanged: (phone) {
                 print(phone.completeNumber);
               },
+              onCountryChanged: (country) {},
+            ),
+            CustomTextField(
+              controller: phoneController,
+              hintText: 'Enter phone number',
+            ),
+            CustomButton(
+              onTap: () {
+                context
+                    .read<FirebaseAuthMethods>()
+                    .phoneSignIn(context, phoneController.text);
+              },
+              text: 'OK',
             ),
             SizedBox(height: size.height * 0.03),
             Container(
@@ -86,12 +116,9 @@ class RegisterScreen extends StatelessWidget {
             Container(
               alignment: Alignment.center,
               margin: const EdgeInsets.symmetric(horizontal: 40),
-              child: TextField(
-                onChanged: (String text) {
-                  password = text;
-                },
-                decoration: const InputDecoration(labelText: "Password"),
-                obscureText: true,
+              child: CustomTextField(
+                controller: passwordController,
+                hintText: 'Enter your password',
               ),
             ),
             SizedBox(height: size.height * 0.05),
@@ -99,7 +126,7 @@ class RegisterScreen extends StatelessWidget {
               alignment: Alignment.centerRight,
               margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: signUpUser,
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(80.0)),
@@ -133,7 +160,7 @@ class RegisterScreen extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const LoginScreen()))
+                          builder: (context) => const EmailPasswordLogin()))
                 },
                 child: const Text(
                   "Already Have an Account? Sign in",
